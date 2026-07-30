@@ -1,5 +1,3 @@
-
-
 export const apiRequest = async (url) => {
   const response = await fetch(url);
   const data = await response.json().catch(() => null);
@@ -8,7 +6,6 @@ export const apiRequest = async (url) => {
 };
 
 export async function fetchRequest(url, values) {
-
   const init = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -17,7 +14,9 @@ export async function fetchRequest(url, values) {
 
   const response = await fetch(url, init);
   const data = await response.json().catch(() => null);
-  if (!response.ok) throw createApiError(response, data, url);
+  if (!response.ok){
+    throw createApiError(response, data, url);
+  }
   return data;
 }
 
