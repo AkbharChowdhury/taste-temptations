@@ -17,8 +17,8 @@ import {  errorMessageTag, getTemplateClone } from './ui/dom.js';
 
 
 const NO_RECIPES_FOUND_MESSAGE = "Whoops, we couldn't find any recipes...";
-const searchForm = document.querySelector('form');
-const errorContainer = document.querySelector('#error-tag');
+const searchFormEl = document.querySelector('form');
+const errorEl = document.querySelector('#error-tag');
 
 const endpoints = {
     random: 'random',
@@ -69,12 +69,12 @@ function handleRandomRecipesError(err) {
 
 function showError(msg) {
     clearRecipes();
-    errorContainer.innerHTML = errorMessageTag(msg);
+    errorEl.innerHTML = errorMessageTag(msg);
 }
-searchForm.addEventListener('submit', async (e) => {
+searchFormEl.addEventListener('submit', async (e) => {
 
     e.preventDefault();
-    errorContainer.innerHTML = '';
+    errorEl.innerHTML = '';
 
     try {
         const params = constructSearchURLParams();
@@ -95,7 +95,7 @@ searchForm.addEventListener('submit', async (e) => {
         showFilteredRecipes(recipes);
 
     } catch (error) {
-        errorContainer.innerHTML = errorMessageTag(error.message);
+        errorEl.innerHTML = errorMessageTag(error.message);
     }
 });
 

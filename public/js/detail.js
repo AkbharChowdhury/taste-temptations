@@ -103,8 +103,8 @@ function handleRecipeDetails(response) {
 
     const { status, message } = response
     if (paymentIsRequired(status)) {
-        const errorDiv = document.querySelector('#recipe-details-container');
-        errorDiv.innerHTML = errorMessageTag(message);
+        const errorEl = document.querySelector('#recipe-details-container');
+        errorEl.innerHTML = errorMessageTag(message);
         return;
     }
 
@@ -146,6 +146,9 @@ function displayRecipeDetails(recipeData) {
 
     const titleEl = document.querySelector('#title');
     const imgEl = document.querySelector('#image');
+    const summaryEl = document.querySelector('#summary');
+    const additionDetailsEl = document.querySelector('#additional-details');
+
     const cuisinesLabel = cuisines.length > 0 ? `| ${cuisines.join(', ')}` : '';
     const additionalDetails = `Serves ${servings}, ready in ${formatDuration(minutes)} ${cuisinesLabel}`;
     const ingredients = createListItems(extendedIngredients, 'original');
@@ -155,7 +158,7 @@ function displayRecipeDetails(recipeData) {
     changeMetaData({ description: summary, keywords: title });
 
     titleEl.textContent = title;
-    document.querySelector('#additional-details').innerText = additionalDetails;
+    additionDetailsEl.innerText = additionalDetails;
 
     renderDishTags(dishTypes);
     showExtraInfo(recipeData);
@@ -163,7 +166,8 @@ function displayRecipeDetails(recipeData) {
     imgEl.src = image;
     imgEl.alt = title;
 
-    document.querySelector('#summary').innerHTML = summary;
+    summaryEl.innerHTML = summary;
+
     appendNodes('#ingredients', ingredients);
 
     const instructions = analyzedInstructions[0];
