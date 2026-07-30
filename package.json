@@ -1,5 +1,5 @@
 {
-  "name": "taste_temptations",
+  "name": "taste-temptations",
   "version": "1.0.0",
   "description": "a website that displays a random selection of recipes, with search feature and recipe details",
   "main": "server.js",
@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AkbharChowdhury/taste_temptations.git"
+    "url": "git+https://github.com/AkbharChowdhury/taste-temptations.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/AkbharChowdhury/taste_temptations/issues"
+    "url": "https://github.com/AkbharChowdhury/taste-temptations/issues"
   },
-  "homepage": "https://github.com/AkbharChowdhury/taste_temptations#readme",
+  "homepage": "https://github.com/AkbharChowdhury/taste-temptations#readme",
   "dependencies": {
     "axios": "^1.13.2",
     "dotenv": "^17.2.3",
