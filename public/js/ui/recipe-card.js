@@ -1,7 +1,9 @@
 "use strict";
 
-import { getTemplateClone } from './utils.js';
-import { formatDuration, DurationFormatStyle } from './duration.js';
+import { getTemplateClone } from './dom.js';
+import { formatDuration, DurationFormatStyle } from '../utils/duration.js';
+
+
 const renderIcon = (name) => `<i class="fa-solid fa-${name}"></i>`;
 const renderCheapBadge = (isCheap) => `<i class="fa-solid fa-${isCheap ? 'tag' : 'tags'}"></i>`;
 
@@ -43,7 +45,6 @@ export const recipeCard = (recipe, renderContext) => {
   img.src = image;
   img.alt = title;
   
-
   clone.querySelector('.card-title').textContent = title;
   clone.querySelector(getDataSelector('servings')).innerText = servings;
   clone.querySelector(getDataSelector('likes')).innerText = likes.toLocaleString();

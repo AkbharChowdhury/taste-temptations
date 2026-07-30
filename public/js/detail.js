@@ -1,32 +1,36 @@
 "use strict";
+// API
+import {
+    paymentIsRequired,
+    apiRequest,
+} from './utils/api.js';
+
 // Utils
 import {
     titleCase,
     isValidNumber,
+} from './utils/helper.js';
+
+
+import {
     changeMetaData,
-    getTemplateClone
-} from './helper/utils.js';
+    getTemplateClone,
+    errorMessageTag,
+} from './ui/dom.js';
 
-import { formatDuration } from './helper/duration.js';
 
-// API
-import { apiRequest } from './helper/api.js';
+import { formatDuration } from './utils/duration.js';
 
 // UI
-import {
-    errorMessageTag,
-    paymentIsRequired,
-} from './helper/ui-utils.js';
-
-import { similarRecipeCard } from './helper/recipe-card.js';
+import { similarRecipeCard } from './ui/recipe-card.js';
 
 // Detail-specific logic
 import {
     createListItems,
-    appendNodes,
     showExtraInfo,
-} from './helper/detail-snippets.js';
+} from './ui/detail-snippets.js';
 
+import  { appendNodes } from './ui/dom.js';
 
 const id = fetchRecipeID();
 
@@ -164,14 +168,18 @@ function displayRecipeDetails(recipeData) {
     appendNodes('#ingredients', ingredients);
 
     const instructions = analyzedInstructions[0];
+
+    if (instructions === undefined) {
+        hideSteps();
+        return;
+    }
     showInstructions(instructions);
 }
 
 function showInstructions(instructions) {
-    const hasInstructions = instructions !== undefined;
     const { steps } = instructions;
     const showSteps = () => appendNodes('#steps', createListItems(steps, 'step'));
-    hasInstructions ? showSteps() : hideSteps();
+    showSteps();
 }
 
 function hideSteps() {
@@ -181,6 +189,7 @@ function hideSteps() {
         'steps': 'steps',
         'hr': 'hr',
     }
+
     const hideElement = (el) => document.querySelector(`#${el}`).style.display = 'none';
     Object.values(instructionSection).forEach(hideElement);
 }

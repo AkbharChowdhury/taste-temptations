@@ -1,3 +1,7 @@
+const PAYMENT_REQUIRED_CODE = 402;
+
+export const paymentIsRequired = (code) => code === PAYMENT_REQUIRED_CODE;
+
 function createApiError(res, data, url, method = 'GET') {
   return {
     status: res.status,

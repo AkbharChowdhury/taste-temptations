@@ -5,7 +5,8 @@
   "main": "server.js",
   "type": "module",
   "imports": {
-    "#utils/*": "./public/js/helper/*"
+    "#utils/*": "./public/js/utils/*"
+
   },
   "scripts": {
     "dev": "nodemon server.js"

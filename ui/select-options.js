@@ -1,4 +1,4 @@
-import { titleCase } from '#utils/utils.js';
+import { titleCase } from '#utils/helper.js';
 const displayItem = (item) => typeof item === 'string' ? titleCase(item) : item;
 
 export class SelectOptions {

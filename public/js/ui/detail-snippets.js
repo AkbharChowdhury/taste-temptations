@@ -1,5 +1,7 @@
 
-import { titleCase, createLi } from './utils.js';
+import { titleCase } from '../utils/helper.js';
+import { createLi, createFragment } from './dom.js';
+
 
 export const createListItems = (items, key) => items.map(item => createLi(item[key]));
 
@@ -19,7 +21,7 @@ const getTags = (tags) => {
     const div = document.createElement('div');
     div.className = 'd-flex flex-row mb-3';
     const tagElements = tags.map(createTagElement);
-    const fragment = createFragment(tagElements)
+    const fragment = createFragment(tagElements);
     div.appendChild(fragment)
     return div;
 }
@@ -44,16 +46,6 @@ export function showExtraInfo({ vegan, vegetarian, glutenFree, diets }) {
     container.remove()
 
 }
-export function appendNodes(selector, arr=[]) {
-    const container = document.querySelector(selector);
-    const fragment = createFragment(arr);
-    container.appendChild(fragment);
-}
 
-function createFragment(arr=[]){
-    const fragment = new DocumentFragment();
-    arr.forEach(item => fragment.append(item));
-    return fragment;
-}
 
 

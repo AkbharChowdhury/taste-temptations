@@ -1,4 +1,4 @@
-import { getCheckboxValues } from './dom-utils.js';
+import { getCheckboxValues } from './dom.js';
 
 const getSearchParams = () => {
   const query = document.querySelector('#text').value.trim();
