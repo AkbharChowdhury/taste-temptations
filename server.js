@@ -13,8 +13,6 @@ const app = express();
 const getBodyValue = (req) => Object.values(req.body).toString();
 
 app.listen(PORT, () => console.log(`Server listening on port ${PORT.toLocaleString()}`));
-
-
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -51,26 +49,35 @@ app.get('/record', (req, res) => {
     }
 });
 
-app.get('/random', (req, res) =>
-    recipe.random()
+app.get('/random', (req, res) => recipe.random()
         .then(recipes => res.send(recipes))
         .catch(err => handleError(res, err, recipeErrors.random)));
-app.get('/search', (req, res) =>
-    recipe.search(req.query)
+
+app.get('/search', (req, res) => recipe.search(req.query)
         .then(recipes => res.send(recipes))
         .catch(err => handleError(res, err, recipeErrors.search))
 );
-app.post('/detail', (req, res) =>
-    recipe.details(getBodyValue(req))
-        .then(recipes => res.send(recipes))
-        .catch(err => handleError(res, err, recipeErrors.details)));
 
-app.post('/similar', (req, res) =>
-    recipe.similar(getBodyValue(req))
+app.post('/detail', (req, res) => {
+    const recipeDetailsId = getBodyValue(req);
+    recipe.details(recipeDetailsId)
         .then(recipes => res.send(recipes))
-        .catch(err => handleError(res, err, recipeErrors.similar)));
+        .catch(err => handleError(res, err, recipeErrors.details))
+});
+  
 
-app.post('/nutrition-label', (req, res) =>
-    recipe.nutritionLabelWidget(getBodyValue(req))
-        .then(data => res.send(data))
-        .catch(err => handleError(res, err, ui.nutrition)));
+app.post('/similar', (req, res) =>{
+    const similarRecipieId = getBodyValue(req);
+     recipe.similar(similarRecipieId)
+        .then(recipes => res.send(recipes))
+        .catch(err => handleError(res, err, recipeErrors.similar));
+});
+
+app.post('/nutrition-label', (req, res) => {
+    const nutritionId = getBodyValue(req);
+    recipe.nutritionLabelWidget(nutritionId)
+     .then(data => res.send(data))
+    .catch(err => handleError(res, err, ui.nutrition))
+
+});
+   

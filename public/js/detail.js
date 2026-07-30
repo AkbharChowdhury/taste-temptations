@@ -10,7 +10,7 @@ import {
 import { formatDuration } from './helper/duration.js';
 
 // API
-import { fetchRequest } from './helper/api.js';
+import { apiRequest } from './helper/api.js';
 
 // UI
 import {
@@ -35,6 +35,12 @@ const endpoints = {
     similar: 'similar',
     nutritionLabel: 'nutrition-label',
 };
+
+const api = {
+    details: (id) => apiRequest(endpoints.details, id),
+    similar: (id) => apiRequest(endpoints.similar, id),
+};
+
 
 const renderContext = {
     selectors: {
@@ -75,13 +81,13 @@ const renderSimilarRecipeList = (recipes) => {
 
 
 
-const loadSimilarRecipes = (id) => fetchRequest(endpoints.similar, id)
+const loadSimilarRecipes = (id) => api.similar(id)
 .then(recipes => renderSimilarRecipeList(recipes));
 
 (function () {
 
     if (isValidNumber(id)) {
-        fetchRequest(endpoints.details, id)
+        api.details(id)
             .then(handleRecipeDetails)
             .catch(console.error);
     }
