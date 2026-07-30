@@ -78,6 +78,5 @@ app.post('/nutrition-label', (req, res) => {
     recipe.nutritionLabelWidget(nutritionId)
      .then(data => res.send(data))
     .catch(err => handleError(res, err, ui.nutrition))
-
 });
    
