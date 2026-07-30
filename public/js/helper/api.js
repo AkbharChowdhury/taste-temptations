@@ -1,4 +1,25 @@
-const headers = { 'Content-Type': 'application/json' };
+
+
+export const apiRequest = async (url) => {
+  const response = await fetch(url);
+  const data = await response.json().catch(() => null);
+  if (!response.ok) throw createApiError(response, data, url);
+  return data;
+};
+
+export async function fetchRequest(url, values) {
+
+  const init = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ values }),
+  };
+
+  const response = await fetch(url, init);
+  const data = await response.json().catch(() => null);
+  if (!response.ok) throw createApiError(response, data, url);
+  return data;
+}
 
 function createApiError(res, data, url, method = 'GET') {
   return {
@@ -8,26 +29,4 @@ function createApiError(res, data, url, method = 'GET') {
     url,
     method,
   };
-}
-
-export const apiRequest = async (url) => {
-  const res = await fetch(url);
-  const data = await res.json().catch(() => null);
-  if (!res.ok) throw createApiError(res, data, url);
-  return data;
-};
-
-export async function fetchRequest(url, values) {
-  const body = JSON.stringify({ values });
-
-  const init = {
-    method: 'POST',
-    headers,
-    body,
-  };
-
-  const res = await fetch(url, init);
-  const data = await res.json().catch(() => null);
-  if (!res.ok) throw createApiError(res, data, url);
-  return data;
 }
