@@ -20,10 +20,9 @@ function createPostInit(values){
       };
 }
 export async function apiRequest(url, values) {
-
-  const response = values !== undefined ? await fetch(url, createPostInit(values)) : await fetch(url);
+  const init = values!== undefined ? createPostInit(values) : undefined;
+  const response = await fetch(url, init);
   const data = await response.json().catch(() => null);
-
   if (!response.ok) {
     throw createApiError(response, data, url);
   }

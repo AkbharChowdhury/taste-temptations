@@ -59,17 +59,16 @@ function fetchRecipeID() {
     return id ? Number(id) : 0;
 }
 
-function showDishTypeTags(dishes = []) {
+function renderDishTags(dishes = []) {
     const container = document.querySelector('#dish-list');
     const fragment = new DocumentFragment();
-
     for (const dish of dishes) {
-        const clone = getTemplateClone('#dish-types-template');
-        clone.querySelector('span').textContent = titleCase(dish);
-        fragment.appendChild(clone);
+        const tag = getTemplateClone('#dish-types-template');
+        tag.querySelector('span').textContent = titleCase(dish);
+        fragment.append(tag);
     }
 
-    container.append(fragment);
+    container.replaceChildren(fragment);
 }
 
 const renderSimilarRecipeList = (recipes) => {
@@ -158,7 +157,7 @@ function displayRecipeDetails(recipeData) {
     titleEl.textContent = title;
     document.querySelector('#additional-details').innerText = additionalDetails;
 
-    showDishTypeTags(dishTypes);
+    renderDishTags(dishTypes);
     showExtraInfo(recipeData);
 
     imgEl.src = image;
