@@ -67,8 +67,8 @@ app.post('/detail', (req, res) => {
   
 
 app.post('/similar', (req, res) =>{
-    const similarRecipieId = getBodyValue(req);
-     recipe.similar(similarRecipieId)
+    const similarRecipiesId = getBodyValue(req);
+     recipe.similar(similarRecipiesId)
         .then(recipes => res.send(recipes))
         .catch(err => handleError(res, err, recipeErrors.similar));
 });
