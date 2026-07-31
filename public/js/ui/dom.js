@@ -30,14 +30,18 @@ export function changeMetaData(metaData) {
     }
 }
 
-export function appendNodes(selector, arr=[]) {
+export function appendNodes(selector, nodes=[]) {
     const container = document.querySelector(selector);
-    const fragment = createFragment(arr);
+    const fragment = createFragment(nodes);
     container.appendChild(fragment);
 }
 
-export function createFragment(arr=[]){
-    const fragment = new DocumentFragment();
-    arr.forEach(item => fragment.append(item));
-    return fragment;
+export function createFragment(nodes = []) {
+  const fragment = new DocumentFragment();
+
+  for (const node of nodes) {
+    fragment.append(node);
+  }
+
+  return fragment;
 }
