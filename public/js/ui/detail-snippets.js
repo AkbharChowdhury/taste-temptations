@@ -27,7 +27,8 @@ const getTags = (tags) => {
 }
 
 export function showExtraInfo({ vegan, vegetarian, glutenFree, diets }) {
-    const showTag = (type, value) => value ? `<span class="badge text-bg-success p-2">${titleCase(type)}</span>` : '';
+
+    const showTag = (type, value) => value ?/*html*/ `<span class="badge text-bg-success p-2">${titleCase(type)}</span>` : '';
     const tags = [
         showTag('vegan', vegan),
         showTag('vegetarian', vegetarian),
@@ -36,14 +37,18 @@ export function showExtraInfo({ vegan, vegetarian, glutenFree, diets }) {
 
     const container = document.querySelector('#tags-data');
     const hasDiet = diets.length > 0;
+    const hasTags = tags.length > 0;
     const dietLabel = `<p class="pt-2">Suitable for diets: <strong>${diets}</strong></p>`;
     
-    if (tags.length > 0) container.insertAdjacentElement('beforebegin', getTags(tags));
+    if (hasTags) container.insertAdjacentElement('beforebegin', getTags(tags));
     if (hasDiet) container.insertAdjacentHTML('beforebegin', dietLabel);
     
-    const isContainerEmpty = tags.length === 0 && !hasDiet;
-    if (isContainerEmpty) document.querySelector('#tags').remove();
-    container.remove()
+    const isContainerEmpty = !hasTags && !hasDiet;
+    if (isContainerEmpty){
+        document.querySelector('#tags').remove();
+    }
+
+    container.remove();
 
 }
 
