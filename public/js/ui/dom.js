@@ -21,8 +21,10 @@ export function getTemplateClone(templateSelector) {
     const clone = template.content.cloneNode(true);
     return clone;
 };
-export const getCheckboxValues = (name) => [...document.querySelectorAll(`input[name="${name}"]:checked`)]
+export const getCheckboxValues = (name) => 
+    [...document.querySelectorAll(`input[name="${name}"]:checked`)]
 .map(el => el.value);
+
 export function changeMetaData(metaData) {
     const metas = document.getElementsByTagName("meta");
     for (const [key, value] of Object.entries(metaData)) {
@@ -38,10 +40,9 @@ export function appendNodes(selector, nodes=[]) {
 
 export function createFragment(nodes = []) {
   const fragment = new DocumentFragment();
-
   for (const node of nodes) {
     fragment.append(node);
   }
-
+   
   return fragment;
 }

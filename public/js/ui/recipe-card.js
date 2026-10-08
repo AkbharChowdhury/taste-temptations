@@ -31,20 +31,16 @@ export const recipeCard = (recipe, renderContext) => {
   } = recipe;
 
   const clone = getTemplateClone(selectors.template);
-  
+  const img = clone.querySelector('img');
+  img.src = image;
+  img.alt = title;
 
-  const badges = {
+    const badges = {
     glutenFree: clone.querySelector(getDataSelector('gluten-free')),
     dairyFree: clone.querySelector(getDataSelector('dairy-free')),
     popular: clone.querySelector(getDataSelector('popular')),
     cheap: clone.querySelector(getDataSelector('is-cheap')),
   };
-
-
-  const img = clone.querySelector('img');
-  img.src = image;
-  img.alt = title;
-  
   clone.querySelector('.card-title').textContent = title;
   clone.querySelector(getDataSelector('servings')).innerText = servings;
   clone.querySelector(getDataSelector('likes')).innerText = likes.toLocaleString();

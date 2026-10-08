@@ -16,6 +16,7 @@ import {
     changeMetaData,
     getTemplateClone,
     errorMessageTag,
+    appendNodes,
 } from './ui/dom.js';
 
 
@@ -30,7 +31,6 @@ import {
     showExtraInfo,
 } from './ui/detail-snippets.js';
 
-import  { appendNodes } from './ui/dom.js';
 
 const id = fetchRecipeID();
 
@@ -44,7 +44,6 @@ const api = {
     details: (id) => apiRequest(endpoints.details, id),
     similar: (id) => apiRequest(endpoints.similar, id),
 };
-
 
 const renderContext = {
     selectors: {
@@ -62,6 +61,7 @@ function fetchRecipeID() {
 function renderDishTags(dishes = []) {
     const container = document.querySelector('#dish-list');
     const fragment = new DocumentFragment();
+
     for (const dish of dishes) {
         const tag = getTemplateClone('#dish-types-template');
         tag.querySelector('span').textContent = titleCase(dish);
@@ -88,7 +88,6 @@ const loadSimilarRecipes = (id) => api.similar(id)
 .then(recipes => renderSimilarRecipeList(recipes));
 
 (function () {
-
     if (isValidNumber(id)) {
         api.details(id)
             .then(handleRecipeDetails)
@@ -96,8 +95,6 @@ const loadSimilarRecipes = (id) => api.similar(id)
     }
 
 })();
-
-
     
 function handleRecipeDetails(response) {
 
@@ -126,6 +123,7 @@ async function getNutritionLabel(url, id) {
 }
 
 function displayNutritionLabel(nutritionHtml) {
+    console.log(nutritionHtml);
     const nutritionLabel = nutritionHtml.split('</style>')[1];
     const container = document.querySelector('#nutrition-label-widget');
     container.insertAdjacentHTML('afterbegin', nutritionLabel);
@@ -186,13 +184,7 @@ function showInstructions(instructions) {
 }
 
 function hideSteps() {
-
-    const instructionSection = {
-        'header': 'instructions-header',
-        'steps': 'steps',
-        'hr': 'hr',
-    }
-
-    const hideElement = (el) => document.querySelector(`#${el}`).style.display = 'none';
-    Object.values(instructionSection).forEach(hideElement);
+    const instructionIds = ['instructions-header', 'steps', 'hr'];
+    const hideElement = (id) => document.getElementById(id).style.display = 'none';
+    instructionIds.forEach(hideElement);
 }
