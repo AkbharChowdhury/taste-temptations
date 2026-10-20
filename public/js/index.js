@@ -52,7 +52,6 @@ const renderRecipeList = (recipes) => {
 
 (function () {
     renderSearchForm();
-    
     api.random()
     .then(({ recipes }) => renderRecipeList(recipes))
     .catch(handleRandomRecipesError);

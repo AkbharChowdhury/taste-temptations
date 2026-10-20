@@ -31,10 +31,10 @@ export const cuisines = [
 ];
 
 export const intolerances = [
-    { label: 'Dairy', icon: 'fa-solid fa-cow', library: 'fa' },
+    { label: 'Dairy', icon: 'iconmind:dairy-free-outline-bold', library: 'iconify' },
     { label: 'Egg', icon: 'fa-solid fa-egg', library: 'fa' },
     { label: 'Gluten', icon: 'fa-solid fa-wheat-awn', library: 'fa' },
-    { label: 'Grain', icon: 'mdi:barley', library: 'iconify' },
+    { label: 'Grain', icon: 'healthicons:gluten-free-outline', library: 'iconify' },
     { label: 'Peanut', icon: 'mdi:peanut-off-outline', library: 'iconify' },
     { label: 'Seafood', icon: 'fa-solid fa-fish', library: 'fa' },
     { label: 'Sesame', icon: 'mdi:seed', library: 'iconify' },
@@ -42,7 +42,8 @@ export const intolerances = [
     { label: 'Soy', icon: 'mdi:soy-sauce', library: 'iconify' },
     { label: 'Sulfite', icon: 'mdi:flask-outline', library: 'iconify' },
     { label: 'Tree Nut', icon: 'energy-icons:acorn-20', library: 'iconify' },
-    { label: 'Wheat', icon: 'fa-solid fa-wheat-awn', library: 'fa' },
+    { label: 'Wheat', icon: 'mdi:barley-off', library: 'iconify' },
+
 ];
 
 

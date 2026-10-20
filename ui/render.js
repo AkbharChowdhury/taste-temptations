@@ -28,12 +28,10 @@ const renderCuisine = (cuisine) =>/*html*/ `<div class="form-check">
 
 function renderIcon(icon, library) {
     if (!icon) return '';
-
     if (library === 'fa') {
         return `<i class="${icon} intolerance-icon" aria-hidden="true"></i>`;
     }
-
-    return `<iconify-icon icon="${icon}" class="intolerance-icon" aria-hidden="true"></iconify-icon>`;
+    return `<iconify-icon icon="${icon}" aria-hidden="true"></iconify-icon>`;
 }
 const renderIntolerance = ({ label: intolerance, icon, library }) => {
     const iconMarkup = renderIcon(icon, library);
