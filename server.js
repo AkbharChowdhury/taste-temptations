@@ -1,5 +1,5 @@
 import express from 'express'
-import Recipe from './recipe.js';
+import {Recipe} from './recipe.js';
 import { errorMessages, handleError } from './error-utils.js';
 
 const PORT = 3_000;
@@ -78,3 +78,4 @@ app.post('/nutrition-label', (req, res) => {
      .then(data => res.send(data))
     .catch(err => handleError(res, err, ui.nutrition))
 });
+

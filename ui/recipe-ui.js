@@ -19,7 +19,7 @@ export class RecipeUI {
     intolerances() {
         return renderIntolerances();
     }
-
+    
     record({ numItems, nearestNumber }) {
         const DEFAULT_RECORDS_PER_PAGE =  this.#DEFAULT_RECORDS_PER_PAGE;
         const nextNum = createNextNumberGenerator({ initialValue: DEFAULT_RECORDS_PER_PAGE, n: nearestNumber });
