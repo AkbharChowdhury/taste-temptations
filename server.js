@@ -78,4 +78,4 @@ app.post('/nutrition-label', (req, res) => {
      .then(data => res.send(data))
     .catch(err => handleError(res, err, ui.nutrition))
 });
-   
+console.log(ui.record({ numItems: 7, nearestNumber: 10 }))   
