@@ -6,7 +6,6 @@
   "type": "module",
   "imports": {
     "#utils/*": "./public/js/utils/*"
-
   },
   "scripts": {
     "dev": "nodemon server.js"
@@ -27,6 +26,7 @@
     "dotenv": "^17.2.3",
     "epxress": "^0.0.1-security",
     "express": "^5.1.0",
+    "iconify-icon": "^3.0.4",
     "js-circle-progress": "^1.0.0",
     "typed-query-selector": "^2.12.2"
   },

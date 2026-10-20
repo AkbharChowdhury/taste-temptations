@@ -31,18 +31,18 @@ export const cuisines = [
 ];
 
 export const intolerances = [
-    { label: 'Dairy', icon: 'fa-solid fa-cow' },
-    { label: 'Egg', icon: 'fa-solid fa-egg' },
-    { label: 'Gluten', icon: 'fa-solid fa-wheat' },
-    { label: 'Grain', icon: null },
-    { label: 'Peanut', icon: null },
-    { label: 'Seafood', icon: 'fa-solid fa-fish' },
-    { label: 'Sesame', icon: null },
-    { label: 'Shellfish', icon: 'fa-solid fa-shrimp' },
-    { label: 'Soy', icon: null },
-    { label: 'Sulfite', icon: null },
-    { label: 'Tree Nut', icon: null },
-    { label: 'Wheat', icon: 'fa-solid fa-wheat-awn-circle-exclamation' },
+    { label: 'Dairy', icon: 'fa-solid fa-cow', library: 'fa' },
+    { label: 'Egg', icon: 'fa-solid fa-egg', library: 'fa' },
+    { label: 'Gluten', icon: 'fa-solid fa-wheat-awn', library: 'fa' },
+    { label: 'Grain', icon: 'mdi:barley', library: 'iconify' },
+    { label: 'Peanut', icon: 'mdi:peanut-off-outline', library: 'iconify' },
+    { label: 'Seafood', icon: 'fa-solid fa-fish', library: 'fa' },
+    { label: 'Sesame', icon: 'mdi:seed', library: 'iconify' },
+    { label: 'Shellfish', icon: 'fa-solid fa-shrimp', library: 'fa' },
+    { label: 'Soy', icon: 'mdi:soy-sauce', library: 'iconify' },
+    { label: 'Sulfite', icon: 'mdi:flask-outline', library: 'iconify' },
+    { label: 'Tree Nut', icon: 'energy-icons:acorn-20', library: 'iconify' },
+    { label: 'Wheat', icon: 'fa-solid fa-wheat-awn', library: 'fa' },
 ];
 
 

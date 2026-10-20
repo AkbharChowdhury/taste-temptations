@@ -10,6 +10,11 @@
     --heart: #C51104;
 
 }
+.intolerance-icon {
+    font-size: 1.2rem;
+    vertical-align: middle;
+    margin-right: 0.25rem;
+}
 .bi-heart-fill {
     color: var(--heart);
 }

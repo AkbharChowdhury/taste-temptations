@@ -6,7 +6,7 @@ import { sortedArray } from '#utils/helper.js';
 const sortIcons = (a, b) => a.label.toLowerCase().localeCompare(b.label.toLowerCase());
 export const renderCuisines = () =>
     sortedArray(cuisines)
-        .map(renderCuisine);
+        .map(renderCuisine).join('');
 export const renderIntolerances = () =>
     intolerances
         .sort(sortIcons)
@@ -26,11 +26,19 @@ const renderCuisine = (cuisine) =>/*html*/ `<div class="form-check">
             </label>
         </div>`;
 
-const renderIntolerance = ({ label: intolerance, icon }) => {
-    const iconMarkup = icon ? `<i class="${icon} me-1"></i>` : '';
+function renderIcon(icon, library) {
+    if (!icon) return '';
+
+    if (library === 'fa') {
+        return `<i class="${icon} intolerance-icon" aria-hidden="true"></i>`;
+    }
+
+    return `<iconify-icon icon="${icon}" class="intolerance-icon" aria-hidden="true"></iconify-icon>`;
+}
+const renderIntolerance = ({ label: intolerance, icon, library }) => {
+    const iconMarkup = renderIcon(icon, library);
     return /*html*/`<span class="p-2">
 <input type="checkbox" class="btn-check" id="${intolerance}" autocomplete="off" name="intolerances" value="${intolerance}">
 <label class="btn btn-outline-danger mt-2" for="${intolerance}">${iconMarkup} ${intolerance}</label> 
 </span>`;
 };
-
