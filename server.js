@@ -23,6 +23,7 @@ app.get('/meals', (req, res) => {
         handleError(res, err, uiErrors.meal);
     }
 });
+
 app.get('/cuisines', (req, res) => {
     try {
         res.send(ui.cuisines());
@@ -30,7 +31,6 @@ app.get('/cuisines', (req, res) => {
         handleError(res, err, uiErrors.cuisine);
     }
 });
-
 
 app.get('/intolerances', (req, res) => {
     try {
@@ -64,7 +64,6 @@ app.post('/detail', (req, res) => {
         .catch(err => handleError(res, err, recipeErrors.details))
 });
   
-
 app.post('/similar', (req, res) =>{
     const similarRecipiesId = getBodyValue(req);
      recipe.similar(similarRecipiesId)
@@ -78,4 +77,3 @@ app.post('/nutrition-label', (req, res) => {
      .then(data => res.send(data))
     .catch(err => handleError(res, err, ui.nutrition))
 });
-
