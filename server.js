@@ -78,4 +78,3 @@ app.post('/nutrition-label', (req, res) => {
     .catch(err => handleError(res, err, ui.nutrition))
 });
 
-// console.log(ui.record({numItems: 2, nearestNumber:2}))
