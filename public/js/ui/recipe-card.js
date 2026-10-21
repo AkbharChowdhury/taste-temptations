@@ -5,11 +5,13 @@ import { formatDuration, DurationFormatStyle } from '../utils/duration.js';
 
 // import { renderIntoleranceIcon } from  '../../../ui/render.js';
 // import { intolerances } from  '../../../ui/recipe-tags.js';
-// import { intolerances } from '../../../ui/recipe-tags.js';
+import { intolerances } from './recipe-tags.js';
+import { renderIntoleranceIcon } from  './render-intolerance-icon.js';
 
-// console.log({intolerances})
 
-console.log("Trying to import from:", new URL('../../../ui/recipe-tags.js', import.meta.url).href);
+console.log({intolerances})
+
+// console.log("Trying to import from:", new URL('../../../ui/recipe-tags.js', import.meta.url).href);
 
 const renderCheapBadge = (isCheap) => `<i class="fa-solid fa-${isCheap ? 'tag' : 'tags'}"></i>`;
 const recipeDetailURL = (id) => `detail.html?id=${id}`;
@@ -23,9 +25,9 @@ const getDataSelector = (name) => `[data-${name}]`;
 // console.log(renderIntoleranceIcon(dairyItem.icon, dairyItem.library))
 // console.log(renderIntoleranceIcon(glutenItem.icon, glutenItem.library))
 function renderDairyBadge(badgeColour = 'danger', text = 'Contains Dairy') {
-  // const dairyItem = intolerances.find(item => item.label === 'Dairy');
-  const dairyIcon = '<i class="fa-solid fa-cow me-1"></i>';
-  // const dairyIcon = renderIntoleranceIcon(dairyItem.icon, dairyItem.library);
+  const dairyItem = intolerances.find(item => item.label === 'Dairy');
+  // const dairyIcon = '<i class="fa-solid fa-cow me-1"></i>';
+  const dairyIcon = renderIntoleranceIcon(dairyItem.icon, dairyItem.library);
   return `<span class="badge rounded-pill text-bg-${badgeColour} text-capitalize">${dairyIcon} ${text}</span>`;
 }
 

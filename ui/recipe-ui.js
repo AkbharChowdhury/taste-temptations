@@ -1,6 +1,7 @@
 import { createNextNumberGenerator } from  './generate-next-number.js';
 import { renderMeals, renderCuisines, renderIntolerances } from './render.js';
-import { SelectOptions } from './select-options.js';
+import { SelectOptions } from '#public_ui/select-options.js';
+
 
 export class RecipeUI {
     #DEFAULT_RECORDS_PER_PAGE;

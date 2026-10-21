@@ -1,15 +1,10 @@
 
-import { SelectOptions } from './select-options.js';
-import { mealTypes, cuisines, intolerances } from './recipe-tags.js';
+import { SelectOptions } from '#public_ui/select-options.js';
+import { mealTypes, cuisines, intolerances } from '#public_ui/recipe-tags.js';
 import { sortedArray } from '#utils/helper.js';
+import { renderIntoleranceIcon } from '#public_ui/render-intolerance-icon.js';
 
-export function renderIntoleranceIcon(icon, library) {
-    if (!icon) return '';
-    if (library === 'fa') {
-        return `<i class="${icon} intolerance-icon" aria-hidden="true"></i>`;
-    }
-    return `<iconify-icon icon="${icon}" aria-hidden="true"></iconify-icon>`;
-}
+
 const sortIcons = (a, b) => a.label.toLowerCase().localeCompare(b.label.toLowerCase());
 export const renderCuisines = () =>
     sortedArray(cuisines)

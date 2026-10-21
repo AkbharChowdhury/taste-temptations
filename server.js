@@ -1,9 +1,6 @@
 import express from 'express'
-import {Recipe} from './recipe.js';
+import { Recipe } from './recipe.js';
 import { errorMessages, handleError } from './error-utils.js';
-import { renderIntoleranceIcon } from './ui/render.js';
-import { intolerances } from './ui/recipe-tags.js';
-
 
 const PORT = 3_000;
 const recipe = new Recipe();
@@ -81,9 +78,3 @@ app.post('/nutrition-label', (req, res) => {
     .catch(err => handleError(res, err, ui.nutrition))
 });
 
-// const dairyItem = intolerances.find(item => item.label === 'Dairy');
-// const glutenItem = intolerances.find(item => item.label === 'Gluten');
-// console.log({dairyItem})
-// console.log({glutenItem})
-// console.log(renderIntoleranceIcon(dairyItem.icon, dairyItem.library))
-// console.log(renderIntoleranceIcon(glutenItem.icon, glutenItem.library))
