@@ -3,17 +3,30 @@
 import { getTemplateClone } from './dom.js';
 import { formatDuration, DurationFormatStyle } from '../utils/duration.js';
 
+// import { renderIntoleranceIcon } from  '../../../ui/render.js';
+// import { intolerances } from  '../../../ui/recipe-tags.js';
+// import { intolerances } from '../../../ui/recipe-tags.js';
 
-const renderIcon = (name) => `<i class="fa-solid fa-${name}"></i>`;
+// console.log({intolerances})
+
+console.log("Trying to import from:", new URL('../../../ui/recipe-tags.js', import.meta.url).href);
+
 const renderCheapBadge = (isCheap) => `<i class="fa-solid fa-${isCheap ? 'tag' : 'tags'}"></i>`;
-
 const recipeDetailURL = (id) => `detail.html?id=${id}`;
 const getRecipeImage = (id) => `https://img.spoonacular.com/recipes/${id}-556x370.jpg`;
 const getDataSelector = (name) => `[data-${name}]`;
 
-
-function renderDairyIcon(badgeCol = 'danger', text = 'Contains Dairy') {
-  return `<span class="badge rounded-pill text-bg-${badgeCol} text-capitalize"><i class="fa-solid fa-cow me-1"></i>${text}</span>`;
+// const dairyItem = intolerances.find(item => item.label === 'Dairy');
+// const glutenItem = intolerances.find(item => item.label === 'Gluten');
+// console.log({dairyItem})
+// console.log({glutenItem})
+// console.log(renderIntoleranceIcon(dairyItem.icon, dairyItem.library))
+// console.log(renderIntoleranceIcon(glutenItem.icon, glutenItem.library))
+function renderDairyBadge(badgeColour = 'danger', text = 'Contains Dairy') {
+  // const dairyItem = intolerances.find(item => item.label === 'Dairy');
+  const dairyIcon = '<i class="fa-solid fa-cow me-1"></i>';
+  // const dairyIcon = renderIntoleranceIcon(dairyItem.icon, dairyItem.library);
+  return `<span class="badge rounded-pill text-bg-${badgeColour} text-capitalize">${dairyIcon} ${text}</span>`;
 }
 
 export const recipeCard = (recipe, renderContext) => {
@@ -52,9 +65,18 @@ export const recipeCard = (recipe, renderContext) => {
 
   // ─── BADGES ───────────────────
   glutenFree && badges.glutenFree.classList.replace('text-bg-danger', 'text-bg-success');
+
   !veryPopular && badges.popular.remove();
   badges.cheap.innerHTML = renderCheapBadge(cheap);
-  badges.dairyFree.innerHTML = !dairyFree ? renderDairyIcon() : renderDairyIcon('success', 'dairy free');
+  
+
+  const dairyData = dairyFree
+  ? { badgeColour: 'success', text: 'dairy free' }
+  : { badgeColour: 'danger', text: 'contains dairy' };
+  badges.dairyFree.innerHTML = renderDairyBadge(dairyData.badgeColour, dairyData.text);
+
+  // badges.dairyFree.innerHTML = !dairyFree ? renderDairyBadge() : renderDairyBadge('success', 'dairy free');
+
 
   return clone;
 
