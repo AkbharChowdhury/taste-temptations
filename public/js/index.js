@@ -13,7 +13,7 @@ import { apiRequest, paymentIsRequired } from './utils/api.js';
 
 // Utils
 import { constructSearchURLParams } from './ui/search.js';
-import {  errorMessageTag, getTemplateClone } from './ui/dom.js';
+import {  errorMessageTag } from './ui/dom.js';
 
 
 const NO_RECIPES_FOUND_MESSAGE = "Whoops, we couldn't find any recipes...";
