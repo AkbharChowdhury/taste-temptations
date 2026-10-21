@@ -6,8 +6,6 @@ import { intolerances } from './recipe-tags.js';
 import { renderIntoleranceIcon } from  './render-intolerance-icon.js';
 
 
-
-
 const renderCheapBadge = (isCheap) => `<i class="fa-solid fa-${isCheap ? 'tag' : 'tags'}"></i>`;
 const recipeDetailURL = (id) => `detail.html?id=${id}`;
 const getRecipeImage = (id) => `https://img.spoonacular.com/recipes/${id}-556x370.jpg`;
@@ -54,7 +52,7 @@ export const recipeCard = (recipe, renderContext) => {
   clone.querySelector(selectors.healthProgress).value = healthScore;
 
   // ─── BADGES ───────────────────
-  const glutenItem = intolerances.find(item => item.label === 'Gluten')
+  const glutenItem = intolerances.find(item => item.label === 'Gluten');
   badges.glutenFree.insertAdjacentHTML('afterbegin', renderIntoleranceIcon(glutenItem.icon, glutenItem.library));
 
   glutenFree && badges.glutenFree.classList.replace('text-bg-danger', 'text-bg-success');
