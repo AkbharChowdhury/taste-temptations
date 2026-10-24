@@ -2,17 +2,18 @@
 import { titleCase } from '../utils/helper.js';
 import { createLi, createFragment } from './dom.js';
 
-
 export const createListItems = (items, key) => items.map(item => createLi(item[key]));
 
 export const getIngredientsList = ({ extendedIngredients }) => createListItems(extendedIngredients, 'original');
 
 export const getSteps = ({ steps }) => createListItems(steps, 'step');
 
+const createTagHtml = (tag) => /*html*/ `<span class="badge text-bg-success p-2">${titleCase(tag)}</span>`;
+
 const createTagElement = (tag) => {
         const div = document.createElement('div');
         div.classList.add('p-2');
-        div.innerHTML = tag;
+        div.innerHTML = createTagHtml(tag);
         return div;
 }
 
@@ -21,19 +22,25 @@ const getTags = (tags) => {
     const div = document.createElement('div');
     div.className = 'd-flex flex-row mb-3';
     const tagElements = tags.map(createTagElement);
-    const fragment = createFragment(tagElements);
+    const fragment = new DocumentFragment();
+    for (const tagEl of tagElements){
+        fragment.append(tagEl);
+    }
     div.appendChild(fragment)
     return div;
 }
 
 export function showExtraInfo({ vegan, vegetarian, glutenFree, diets }) {
 
-    const showTag = (type, value) => value ?/*html*/ `<span class="badge text-bg-success p-2">${titleCase(type)}</span>` : '';
+
     const tags = [
-        showTag('vegan', vegan),
-        showTag('vegetarian', vegetarian),
-        showTag('gluten free', glutenFree)
-    ].filter(tag => tag);
+        { label: 'vegan', value: vegan },
+        { label: 'vegetarian', value: vegetarian },
+        { label: 'gluten free', value: glutenFree }
+
+    ].filter(tag => tag.value)
+    .map(tag => tag.label);
+
 
     const container = document.querySelector('#tags-data');
     const hasDiet = diets.length > 0;
@@ -43,9 +50,10 @@ export function showExtraInfo({ vegan, vegetarian, glutenFree, diets }) {
     if (hasTags) container.insertAdjacentElement('beforebegin', getTags(tags));
     if (hasDiet) container.insertAdjacentHTML('beforebegin', dietLabel);
     
-    const isContainerEmpty = !hasTags && !hasDiet;
-    if (isContainerEmpty){
-        document.querySelector('#tags').remove();
+    const hasNoContent = !hasTags && !hasDiet;
+    const tagsEl = document.querySelector('#tags');
+    if (hasNoContent){
+        tagsEl.remove();
     }
 
     container.remove();
