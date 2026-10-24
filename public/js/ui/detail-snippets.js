@@ -1,6 +1,6 @@
 
 import { titleCase } from '../utils/helper.js';
-import { createLi, createFragment } from './dom.js';
+import { createLi } from './dom.js';
 
 export const createListItems = (items, key) => items.map(item => createLi(item[key]));
 
@@ -32,13 +32,12 @@ const getTags = (tags) => {
 
 export function showExtraInfo({ vegan, vegetarian, glutenFree, diets }) {
 
-
     const tags = [
-        { label: 'vegan', value: vegan },
-        { label: 'vegetarian', value: vegetarian },
-        { label: 'gluten free', value: glutenFree }
+        { label: 'vegan', isActive: vegan },
+        { label: 'vegetarian', isActive: vegetarian },
+        { label: 'gluten free', isActive: glutenFree }
 
-    ].filter(tag => tag.value)
+    ].filter(tag => tag.isActive)
     .map(tag => tag.label);
 
 
@@ -52,10 +51,7 @@ export function showExtraInfo({ vegan, vegetarian, glutenFree, diets }) {
     
     const hasNoContent = !hasTags && !hasDiet;
     const tagsEl = document.querySelector('#tags');
-    if (hasNoContent){
-        tagsEl.remove();
-    }
-
+    if (hasNoContent) tagsEl.remove();
     container.remove();
 
 }
