@@ -39,15 +39,18 @@ export function showExtraInfo({ vegan, vegetarian, glutenFree, diets }) {
 
     ].filter(tag => tag.isActive)
     .map(tag => tag.label);
+    [].join(',')
 
 
     const container = document.querySelector('#tags-data');
     const hasDiet = diets.length > 0;
     const hasTags = tags.length > 0;
-    const dietLabel = `<p class="pt-2">Suitable for diets: <strong>${diets}</strong></p>`;
     
-    if (hasTags) container.insertAdjacentElement('beforebegin', getTags(tags));
-    if (hasDiet) container.insertAdjacentHTML('beforebegin', dietLabel);
+    hasTags && container.insertAdjacentElement('beforebegin', getTags(tags));
+    if (hasDiet){
+        const dietLabel = /*html*/`<p class="pt-2">Suitable for diets: <strong>${diets.join(', ')}</strong></p>`;
+        container.insertAdjacentHTML('beforebegin', dietLabel)
+    }
     
     const hasNoContent = !hasTags && !hasDiet;
     const tagsEl = document.querySelector('#tags');

@@ -123,7 +123,6 @@ async function getNutritionLabel(url, id) {
 }
 
 function displayNutritionLabel(nutritionHtml) {
-    console.log(nutritionHtml);
     const nutritionLabel = nutritionHtml.split('</style>')[1];
     const container = document.querySelector('#nutrition-label-widget');
     container.insertAdjacentHTML('afterbegin', nutritionLabel);
