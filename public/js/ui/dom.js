@@ -1,5 +1,3 @@
-
-
 export const errorMessageTag = (message) =>  /*html*/ `<div class="alert alert-danger" role="alert">
   <h4 class="alert-heading">Cannot fetch recipe details!</h4>
   <p>Please view message below for more details</p>
@@ -30,19 +28,4 @@ export function changeMetaData(metaData) {
     for (const [key, value] of Object.entries(metaData)) {
         metas[key]['content'] = value;
     }
-}
-
-export function appendNodes(selector, nodes=[]) {
-    const container = document.querySelector(selector);
-    const fragment = createFragment(nodes);
-    container.appendChild(fragment);
-}
-
-export function createFragment(nodes = []) {
-  const fragment = new DocumentFragment();
-  for (const node of nodes) {
-    fragment.append(node);
-  }
-   
-  return fragment;
 }

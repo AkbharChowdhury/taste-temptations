@@ -16,7 +16,7 @@ import {
     changeMetaData,
     getTemplateClone,
     errorMessageTag,
-    appendNodes,
+    // appendNodes,
 } from './ui/dom.js';
 
 
@@ -85,7 +85,7 @@ const renderSimilarRecipeList = (recipes) => {
 
 
 const loadSimilarRecipes = (id) => api.similar(id)
-.then(recipes => renderSimilarRecipeList(recipes));
+    .then(recipes => renderSimilarRecipeList(recipes));
 
 (function () {
     if (isValidNumber(id)) {
@@ -95,7 +95,7 @@ const loadSimilarRecipes = (id) => api.similar(id)
     }
 
 })();
-    
+
 function handleRecipeDetails(response) {
 
     const { status, message } = response
@@ -149,7 +149,7 @@ function displayRecipeDetails(recipeData) {
     const cuisinesLabel = cuisines.length > 0 ? `| ${cuisines.join(', ')}` : '';
     const additionalDetails = `Serves ${servings}, ready in ${formatDuration(minutes)} ${cuisinesLabel}`;
     const ingredients = createListItems(extendedIngredients, 'original');
-    
+
     document.title = `Taste Temptations: ${title}`;
 
     changeMetaData({ description: summary, keywords: title });
@@ -165,7 +165,7 @@ function displayRecipeDetails(recipeData) {
 
     summaryEl.innerHTML = summary;
 
-    appendNodes('#ingredients', ingredients);
+    appendNodes({ selector: '#ingredients', items: ingredients });
 
     const instructions = analyzedInstructions[0];
 
@@ -176,9 +176,20 @@ function displayRecipeDetails(recipeData) {
     showInstructions(instructions);
 }
 
+function appendNodes({ selector, items }) {
+
+    const fragment = new DocumentFragment();
+    const container = document.querySelector(selector);
+    for (const item of items) {
+        fragment.append(item)
+    }
+    container.append(fragment);
+}
+
 function showInstructions(instructions) {
     const { steps } = instructions;
-    const showSteps = () => appendNodes('#steps', createListItems(steps, 'step'));
+
+    const showSteps = () => appendNodes({ selector: '#steps', items: createListItems(steps, 'step') });
     showSteps();
 }
 
