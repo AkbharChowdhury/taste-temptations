@@ -42,7 +42,7 @@ app.get('/intolerances', (req, res) => {
 
 app.get('/record', (req, res) => {
     try {
-        res.send(ui.record({ numItems: 4, nearestNumber: 5 }));
+        res.send(ui.record({ numItems: 4, nearestNumber: 6 }));
     } catch (err) {
         handleError(res, err, uiErrors.record);
     }
@@ -74,7 +74,7 @@ app.post('/similar', (req, res) =>{
 app.post('/nutrition-label', (req, res) => {
     const nutritionId = getBodyValue(req);
     recipe.nutritionLabelWidget(nutritionId)
-     .then(data => res.send(data))
+     .then(nutritionData => res.send(nutritionData))
     .catch(err => handleError(res, err, ui.nutrition))
 });
 
