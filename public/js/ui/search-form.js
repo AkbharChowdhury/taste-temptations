@@ -7,7 +7,6 @@ const searchFormConfig = [
 
 export async function renderSearchForm() {
   try {
-
     await Promise.all(
       searchFormConfig.map(async ({ resource, container }) => {
         const html = await fetch(resource).then(response => response.text());
