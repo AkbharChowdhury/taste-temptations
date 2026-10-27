@@ -1,12 +1,12 @@
 import { titleCase } from '../utils/helper.js';
 
 const displayItem = (item) => typeof item === 'string' ? titleCase(item) : item;
-const renderValue = (value) => `<option value="${value}">${displayItem(value)}</option>`;
+const renderValue = (value) => /*html*/`<option value="${value}">${displayItem(value)}</option>`;
 
 export class SelectOptions {
     static selectMenu({ options = [], defaultValue }) {
         const values = options.map(renderValue);
-        const defaultOptionValue = `<option value="" selected disabled hidden>${defaultValue}</option>`;
+        const defaultOptionValue = /*html*/`<option value=""> ${defaultValue}</option>`
         return [
             defaultOptionValue, 
             ...values

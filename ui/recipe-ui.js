@@ -25,8 +25,6 @@ export class RecipeUI {
         const DEFAULT_RECORDS_PER_PAGE =  this.#DEFAULT_RECORDS_PER_PAGE;
         const nextNum = createNextNumberGenerator({ initialValue: DEFAULT_RECORDS_PER_PAGE, n: nearestNumber });
         const values = Array.from({ length: numItems }, nextNum);
-        console.log(`default number of recipes: ${DEFAULT_RECORDS_PER_PAGE}`)
-        console.log({values})
         return SelectOptions.selectMenu({ options: values, defaultValue: DEFAULT_RECORDS_PER_PAGE });
     }
 }
