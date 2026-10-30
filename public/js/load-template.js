@@ -24,7 +24,7 @@ async function loadTemplates() {
                 return { selector, html };
             })
         );
-
+        
         return templates;
 
     } catch (err) {
