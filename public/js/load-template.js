@@ -1,19 +1,24 @@
 (async () => {
     const templates = await loadTemplates();
-    renderTemplates(templates);
+     templates.forEach(({ selector, html }) => {
+        const el = document.querySelector(selector);
+        el?.insertAdjacentHTML("beforebegin", html);
+        el?.remove();
+    });
+
     document.querySelector('#load-template')?.remove();
 })();
 
 async function loadTemplates() {
     const templateFolder = 'template';
-    const templateConfigs = [
+    const targets = [
         { selector: '#header', file: 'header.html' },
         { selector: '#footer', file: 'footer.html' },
     ];
 
     try {
         const templates = await Promise.all(
-            templateConfigs.map(async ({ selector, file }) => {
+            targets.map(async ({ selector, file }) => {
                 const response = await fetch(`${templateFolder}/${file}`);
                 const html = await response.text();
                 return { selector, html };
@@ -26,13 +31,4 @@ async function loadTemplates() {
         console.error('Error loading templates:', err);
         return [];
     }
-}
-
-function renderTemplates(templates) {
-    templates.forEach(({ selector, html }) => {
-        const el = document.querySelector(selector);
-        if (!el) return;
-        el.insertAdjacentHTML("beforebegin", html);
-        el.remove();
-    });
 }
