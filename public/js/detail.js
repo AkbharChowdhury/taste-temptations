@@ -42,6 +42,8 @@ const renderContext = {
     selectors: {
         container: '#similar-recipe-list',
         template: '#similar-recipes-template',
+        dishTemplate: '#dish-types-template',
+        dishList: '#dish-list',
     }
 };
 
@@ -61,15 +63,17 @@ function fetchRecipeID() {
 }
 
 function renderDishTags(dishes = []) {
-    const container = document.querySelector('#dish-list');
+    const { dishList, dishTemplate } = renderContext.selectors;
+    const container = document.querySelector(dishList);
     const fragment = new DocumentFragment();
 
     for (const dish of dishes) {
-        const tag = getTemplateClone('#dish-types-template');
+        const tag = getTemplateClone(dishTemplate);
         tag.querySelector('span').textContent = titleCase(dish);
         fragment.append(tag);
+        
     }
-
+    container.app
     container.replaceChildren(fragment);
 }
 
@@ -81,7 +85,7 @@ const renderSimilarRecipeList = (recipes) => {
         fragment.appendChild(similarRecipeCard(recipe, renderContext.selectors.template));
     }
 
-    container.append(fragment);
+    container.replaceChildren(fragment);
 };
 
 
