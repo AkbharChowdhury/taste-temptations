@@ -1,6 +1,5 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
-
 import { getRandomItem } from './public/js/utils/helper.js';
 import { mealTypes, cuisines } from'#public_ui/recipe-tags.js'
 import { RecipeUI } from './ui/recipe-ui.js';
@@ -16,7 +15,6 @@ const api = axios.create({
     headers: {
         'x-api-key': API_KEY
     }
-
 });
 
 export class Recipe {
