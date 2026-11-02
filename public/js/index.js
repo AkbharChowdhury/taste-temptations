@@ -17,7 +17,8 @@ const endpoints = {
 
 const api = {
     random: () => apiRequest(endpoints.random),
-    search: (params) => apiRequest(`${endpoints.search}?${params.toString()}`),
+    search: (url) => apiRequest(url),
+
 };
 
 const renderContext = {
@@ -67,7 +68,11 @@ searchFormEl.addEventListener('submit', async (e) => {
 
     try {
         const params = constructSearchURLParams();
-        const { results: recipes, code, message } = await api.search(params);
+        const url = new URL(endpoints.search, window.location.origin);
+        url.search = params;
+        console.log(url.search)
+    
+        const { results: recipes, code, message } = await api.search(url.href);
 
         if (paymentIsRequired(code)) {
             showError(message);
