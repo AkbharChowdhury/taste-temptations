@@ -1,11 +1,10 @@
 "use strict";
-// API
+
 import {
     paymentIsRequired,
     apiRequest,
 } from './utils/api.js';
 
-// Utils
 import {
     titleCase,
     isValidNumber,
@@ -16,23 +15,17 @@ import {
     changeMetaData,
     getTemplateClone,
     errorMessageTag,
-    // appendNodes,
 } from './ui/dom.js';
 
-
 import { formatDuration } from './utils/duration.js';
-
-// UI
 import { similarRecipeCard } from './ui/recipe-card.js';
-
-// Detail-specific logic
 import {
     createListItems,
     showExtraInfo,
 } from './ui/detail-snippets.js';
 
 
-const id = fetchRecipeID();
+const recipeId = fetchRecipeID();
 
 const endpoints = {
     details: 'detail',
@@ -41,8 +34,8 @@ const endpoints = {
 };
 
 const api = {
-    details: (id) => apiRequest(endpoints.details, id),
-    similar: (id) => apiRequest(endpoints.similar, id),
+    details: (recipeId) => apiRequest(endpoints.details, recipeId),
+    similar: (recipeId) => apiRequest(endpoints.similar, recipeId),
 };
 
 const renderContext = {
@@ -51,6 +44,15 @@ const renderContext = {
         template: '#similar-recipes-template',
     }
 };
+
+(function () {
+    if (isValidNumber(recipeId)) {
+        api.details(recipeId)
+            .then(handleRecipeDetails)
+            .catch(console.error);
+    }
+
+})();
 
 function fetchRecipeID() {
     const searchParams = new URLSearchParams(window.location.search);
@@ -84,17 +86,7 @@ const renderSimilarRecipeList = (recipes) => {
 
 
 
-const loadSimilarRecipes = (id) => api.similar(id)
-    .then(recipes => renderSimilarRecipeList(recipes));
-
-(function () {
-    if (isValidNumber(id)) {
-        api.details(id)
-            .then(handleRecipeDetails)
-            .catch(console.error);
-    }
-
-})();
+const loadSimilarRecipes = (recipeId) => api.similar(recipeId).then(renderSimilarRecipeList);
 
 function handleRecipeDetails(response) {
 
@@ -107,8 +99,8 @@ function handleRecipeDetails(response) {
 
     displayRecipeDetails(response);
 
-    getNutritionLabel(endpoints.nutritionLabel, id).then(displayNutritionLabel);
-    loadSimilarRecipes(id);
+    getNutritionLabel(endpoints.nutritionLabel, recipeId).then(displayNutritionLabel);
+    loadSimilarRecipes(recipeId);
 }
 
 
