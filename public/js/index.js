@@ -70,7 +70,7 @@ searchFormEl.addEventListener('submit', async (e) => {
         const params = constructSearchURLParams();
         const url = new URL(endpoints.search, window.location.origin);
         url.search = params;
-        console.log(url.search)
+        console.log(url)
     
         const { results: recipes, code, message } = await api.search(url.href);
 
