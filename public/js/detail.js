@@ -73,7 +73,7 @@ function renderDishTags(dishes = []) {
         fragment.append(tag);
         
     }
-    container.app
+    
     container.replaceChildren(fragment);
 }
 

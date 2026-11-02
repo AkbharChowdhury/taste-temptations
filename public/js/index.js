@@ -1,20 +1,10 @@
 "use strict";
-// UI
 import { clearRecipes } from './ui/recipe-template.js';
-
 import { recipeCard } from './ui/recipe-card.js';
-
 import { renderSearchForm } from './ui/search-form.js';
-
-
-// API
 import { apiRequest, paymentIsRequired } from './utils/api.js';
-
-
-// Utils
 import { constructSearchURLParams } from './ui/search.js';
 import {  errorMessageTag } from './ui/dom.js';
-
 
 const NO_RECIPES_FOUND_MESSAGE = "Whoops, we couldn't find any recipes...";
 const searchFormEl = document.querySelector('form');
