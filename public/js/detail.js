@@ -13,7 +13,7 @@ import {
 
 import {
     changeMetaData,
-    getTemplateClone,
+    cloneTemplate,
     errorMessageTag,
 } from './ui/dom.js';
 
@@ -68,7 +68,7 @@ function renderDishTags(dishes = []) {
     const fragment = new DocumentFragment();
 
     for (const dish of dishes) {
-        const tag = getTemplateClone(dishTemplate);
+        const tag = cloneTemplate(dishTemplate);
         tag.querySelector('span').textContent = titleCase(dish);
         fragment.append(tag);
         

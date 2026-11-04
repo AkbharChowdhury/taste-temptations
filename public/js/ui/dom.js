@@ -14,7 +14,7 @@ export const createLi = (text) => {
  * 
  * @returns {DocumentFragment}
  */
-export function getTemplateClone(templateSelector) {
+export function cloneTemplate(templateSelector) {
     const template = document.querySelector(templateSelector);
     const clone = template.content.cloneNode(true);
     return clone;

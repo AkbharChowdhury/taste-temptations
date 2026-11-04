@@ -1,6 +1,6 @@
 "use strict";
 
-import { getTemplateClone } from './dom.js';
+import { cloneTemplate } from './dom.js';
 import { formatDuration, DurationFormatStyle } from '../utils/duration.js';
 import { intolerances } from './recipe-tags.js';
 import { renderIntoleranceIcon } from  './render-intolerance-icon.js';
@@ -31,7 +31,8 @@ export const recipeCard = (recipe, renderContext) => {
     dairyFree,
   } = recipe;
 
-  const clone = getTemplateClone(selectors.template);
+
+  const clone = cloneTemplate(selectors.template);
   const img = clone.querySelector('img');
   img.src = image;
   img.alt = title;
@@ -75,7 +76,7 @@ export const recipeCard = (recipe, renderContext) => {
 export const similarRecipeCard = (recipe, template) => {
   
   const { id, title, readyInMinutes: minutes, servings } = recipe;
-  const clone = getTemplateClone(template);
+  const clone = cloneTemplate(template);
 
   const img = clone.querySelector('img');
   img.src = getRecipeImage(id);
